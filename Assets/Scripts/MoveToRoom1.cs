@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MoveToRoom1 : MonoBehaviour
 {
+    public int RoomNumber;
     public void MoveNextRoom()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(RoomNumber);
     }
 
 }
