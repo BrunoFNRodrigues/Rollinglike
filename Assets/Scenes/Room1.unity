@@ -1524,7 +1524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17e74f71bd7b984094fb7a3b170fe50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: Room3
+  RoomNumber: 3
 --- !u!19719996 &643351666
 TilemapCollider2D:
   m_ObjectHideFlags: 0
@@ -3923,7 +3923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17e74f71bd7b984094fb7a3b170fe50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: Room3
+  RoomNumber: 3
 --- !u!19719996 &1334155594
 TilemapCollider2D:
   m_ObjectHideFlags: 0

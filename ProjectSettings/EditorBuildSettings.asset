@@ -9,15 +9,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Combat.unity
     guid: c6f5074ce68e7bc40af432d286389022
   - enabled: 1
-    path: Assets/Scenes/StartRoom.unity
+    path: Assets/Scenes/RoomStart.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/RoomBoss.unity
+    guid: c326325bf928184478621732f4e6e946
   - enabled: 1
     path: Assets/Scenes/Room1.unity
     guid: 69de6c1843104ec4bbd643c6bd97db1f
   - enabled: 1
+    path: Assets/Scenes/Room2.unity
+    guid: c33185a12ba721e4a81e3f652c91c0f5
+  - enabled: 1
     path: Assets/Scenes/Room3.unity
     guid: b21f7b6e41ccdf9418d6fca615aa3cea
   - enabled: 1
-    path: Assets/Scenes/Room2.unity
-    guid: c33185a12ba721e4a81e3f652c91c0f5
+    path: Assets/Scenes/Room4.unity
+    guid: 87aa26458a3c03441b24f7ffad742435
+  - enabled: 1
+    path: Assets/Scenes/Room5.unity
+    guid: 749834626b0f7a14a84989c4ad3a48a8
+  - enabled: 1
+    path: Assets/Scenes/Room6.unity
+    guid: cddfa9fcd55fcac41bdf73ad0a7fcbfa
   m_configObjects: {}

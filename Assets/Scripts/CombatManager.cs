@@ -105,11 +105,11 @@ public class CombatManager : MonoBehaviour
         if (state == CombatState.WON){
             systemDialogue.text = "The player emerges victorious";
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("StartRoom");
+            SceneManager.LoadScene("RoomStart");
         }else if (state == CombatState.LOST){
             systemDialogue.text = "The player is defeated..";
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("StartRoom");
+            SceneManager.LoadScene("RoomStart");
         }
     }
 }
