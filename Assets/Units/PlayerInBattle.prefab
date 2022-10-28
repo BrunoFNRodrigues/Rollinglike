@@ -44,6 +44,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Player
-  str: 25
+  str: 40
+  currStr: 40
   HP: 100
   currHP: 100
+  def: 10
+  currDef: 10
+  spd: 5
+  currSpd: 5
+  acc: 100
+  currAcc: 100
+  healingStatus: 0
+  paralyzedStatus: 0
+  poisonedStatus: 0
+  chargedStatus: 0
