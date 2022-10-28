@@ -96,6 +96,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Crucible Knight
-  str: 10
-  HP: 50
-  currHP: 50
+  str: 15
+  currStr: 15
+  HP: 200
+  currHP: 200
+  def: 30
+  currDef: 30
+  spd: 10
+  currSpd: 10
+  acc: 100
+  currAcc: 100
+  healingStatus: 0
+  paralyzedStatus: 0
+  poisonedStatus: 0
+  chargedStatus: 0
