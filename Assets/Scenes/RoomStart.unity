@@ -305,6 +305,7 @@ MonoBehaviour:
   - {fileID: 1562346387}
   - {fileID: 410031630}
   - {fileID: 1702701344}
+  magicSlots:
   - {fileID: 1699090882}
   - {fileID: 128863434}
   - {fileID: 361614348}
