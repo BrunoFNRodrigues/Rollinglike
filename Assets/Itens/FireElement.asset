@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba8ef878b5e960445801d80e42de80a6, type: 3}
-  m_Name: WaterElement
+  m_Name: FireElement
   m_EditorClassIdentifier: 
-  name: Water
-  image: {fileID: 21300000, guid: a518b8dd8ed7e0e42b54509bbdc43f10, type: 3}
+  name: Fire
+  image: {fileID: 385197209139625459, guid: cf9e15d7e54c5ed449378537d57a5a53, type: 3}
   level: 1

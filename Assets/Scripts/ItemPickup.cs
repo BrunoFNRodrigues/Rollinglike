@@ -6,13 +6,17 @@ public class ItemPickup : MonoBehaviour
 {
     public Item item;
     public GameObject inSceneObject;
-    // Start is called before the first frame update
+    public InventoryManager inventoryManager;
+
     public void PickUp()
     {
         Debug.Log("Picking up "+ item.name);
         //add to inventory
-        Inventory.instance.Add(item);
-        Destroy(inSceneObject);
+        bool added = inventoryManager.AddItem(item);
+        if (added)
+        {
+            Destroy(inSceneObject);
+        }
     }
 
 
