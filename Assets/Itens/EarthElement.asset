@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba8ef878b5e960445801d80e42de80a6, type: 3}
-  m_Name: FireElement
+  m_Name: EarthElement
   m_EditorClassIdentifier: 
-  name: Fire
-  image: {fileID: -7707333107031062578, guid: 2a6913bec5e3fc546902c1a05be80855, type: 3}
+  name: Earth
+  image: {fileID: -5371694543761258626, guid: 2a6913bec5e3fc546902c1a05be80855, type: 3}
   level: 1
