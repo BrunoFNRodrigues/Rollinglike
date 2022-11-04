@@ -40,8 +40,9 @@ public class CombatManager : MonoBehaviour
     public int randomEnemy;
 
     // Essas arrays deverão pegar as spells que o player estiver equipado (por enquanto estão fixas)
-    public string[] ElementalSpells = new string[]{"Fire", "Water", "Earth", "Electric"};
-    public string[] SpecialSpells = new string[]{"Life", "Death"};
+    public List<string> ElementalSpells = new List<string>();
+    public List<string> SpecialSpells = new List<string>();
+
 
     public Text systemDialogue;
     public Text spellPreview;
@@ -69,9 +70,40 @@ public class CombatManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   
-        randomEnemy = Random.Range(0,6);
+    {
+        //Inicializa o espacos de magia
+        if (GlobalMagicSlots.fireLevel > 0)
+        {
+            ElementalSpells.Add("Fire");
+        }
 
+        if (GlobalMagicSlots.waterLevel > 0)
+        {
+            ElementalSpells.Add("Water");
+        }
+
+        if (GlobalMagicSlots.earthLevel > 0)
+        {
+            ElementalSpells.Add("Earth");
+        }
+
+        if (GlobalMagicSlots.eletricLevel > 0)
+        {
+            ElementalSpells.Add("Electric");
+        }
+
+        if (GlobalMagicSlots.lifeLevel > 0)
+        {
+            SpecialSpells.Add("Life");
+        }
+
+        if (GlobalMagicSlots.deathLevel > 0)
+        {
+            SpecialSpells.Add("Death");
+        }
+
+
+        randomEnemy = Random.Range(0, 6);
         state = CombatState.START;
         StartCoroutine(SetupCombat());
     }   
@@ -83,6 +115,8 @@ public class CombatManager : MonoBehaviour
        GameObject playerGO = Instantiate(playerObject);  
        playerUnit = playerGO.GetComponent<UnitInfo>();
 
+        GlobalPlayer.maxHealth = playerUnit.currHP;
+
        CommandBtn1.setSpells();
        CommandBtn2.setSpells();
        CommandBtn3.setSpells();
@@ -92,23 +126,30 @@ public class CombatManager : MonoBehaviour
        spellPreview.text = " ";
 
        enemyHUD.setHUD(enemyUnit); 
-       playerHUD.setHUD(playerUnit); 
+       playerHUD.setHUD(playerUnit);
 
-        //Espera 3 segundos para mudar de estado
-       yield return new WaitForSeconds(3f);
+            //Espera 3 segundos para mudar de estado
+        yield return new WaitForSeconds(3f);
 
-       
-        state = CombatState.PLAYERTURN;
-        PlayerTurn();
-      
+        if (ElementalSpells.Count == 0 || SpecialSpells.Count == 0)
+        {
+            systemDialogue.text = "The player did not equip any spell. The enemy instakills the player!";
+            yield return new WaitForSeconds(3f);
+            state = CombatState.LOST;
+            StartCoroutine(EndCombat());
+        }
+        else{
+            state = CombatState.PLAYERTURN;
+            PlayerTurn();
+        }  
     }
 
     void PlayerTurn(){
         // Escolha do jogador
-        string spell1 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Length)];
-        string spell2 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Length)];
-        string spell3 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Length)];
-        string spell4 = SpecialSpells[UnityEngine.Random.Range (0, SpecialSpells.Length)];
+        string spell1 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Count)];
+        string spell2 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Count)];
+        string spell3 = ElementalSpells[UnityEngine.Random.Range (0, ElementalSpells.Count)];
+        string spell4 = SpecialSpells[UnityEngine.Random.Range (0, SpecialSpells.Count)];
         CommandBtn1.updateSpell(spell1);
         CommandBtn2.updateSpell(spell2);
         CommandBtn3.updateSpell(spell3);
@@ -377,12 +418,22 @@ public class CombatManager : MonoBehaviour
         //FIM DO COMBATE
         if (state == CombatState.WON){
             systemDialogue.text = "The player emerges victorious";
+            GlobalPlayer.currHealth = playerUnit.currHP;
+            GlobalPlayer.winCounter++;
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("RoomStart");
-        }else if (state == CombatState.LOST){
+            if (GlobalPlayer.winCounter == 3)
+            {
+                SceneManager.LoadScene("VictoryScreen");
+            } else
+            {
+
+                SceneManager.LoadScene(Random.Range(1,8));
+            }
+        }
+        else if (state == CombatState.LOST){
             systemDialogue.text = "The player is defeated..";
             yield return new WaitForSeconds(1f);
-            SceneManager.LoadScene("RoomStart");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 
@@ -392,58 +443,58 @@ public class CombatManager : MonoBehaviour
         switch(spellName){
             case"Water v2":
             //Cura bastante com base na vida perdida
-                playerUnit.healUnit(0.6f);
+                playerUnit.healUnit(0.2f * GlobalMagicSlots.waterLevel);
                 systemDialogue.text = "The player is greatly healed!";
                 break;
             case"Mud":
             // Diminui speed do inimigo, cura por valor pequeno e dá dano pequeno
                 playerUnit.healUnit(0.1f);
-                enemyUnit.currSpd -= (int) Mathf.Ceil(0.05f * enemyUnit.spd);
+                enemyUnit.currSpd -= (int) Mathf.Ceil((0.1f * GlobalMagicSlots.waterLevel) * enemyUnit.spd);
                 systemDialogue.text = "Enemy speed and accuracy are lowered. Player is healed.";
-                enemyUnit.TakeDamage(0.2f, playerUnit.currStr);
+                enemyUnit.TakeDamage(0.2f * GlobalMagicSlots.earthLevel, playerUnit.currStr);
                 break;
             case"Steam":
             // Diminui a acurácia do inimigo e dá dano pequeno
-                enemyUnit.currAcc -= (int) Mathf.Ceil(0.1f * enemyUnit.acc);
+                enemyUnit.currAcc -= (int) Mathf.Ceil((0.05f * GlobalMagicSlots.waterLevel) * enemyUnit.acc);
                 systemDialogue.text = "Enemy accuracy is lowered.";
-                enemyUnit.TakeDamage(0.2f, playerUnit.currStr);
+                enemyUnit.TakeDamage(0.2f * GlobalMagicSlots.eletricLevel, playerUnit.currStr);
                 break;
             case"Magma":
             // Aumenta razoavelmente o dano e defesa. Causa dano normal
-                playerUnit.currStr += (int) Mathf.Ceil(0.1f * playerUnit.str);
-                playerUnit.currDef += (int) Mathf.Ceil(0.1f * playerUnit.def);
+                playerUnit.currStr += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.fireLevel) * playerUnit.str);
+                playerUnit.currDef += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.earthLevel) * playerUnit.def);
                 systemDialogue.text = "Player defense and strength are buffed.";
                 enemyUnit.TakeDamage(1f, playerUnit.currStr);
                 break;
             case"Plasma":
             // Aumenta razoavelmente o dano e velocidade. Causa dano normal
-                playerUnit.currStr += (int) Mathf.Ceil(0.1f * playerUnit.str);
-                playerUnit.currSpd += (int) Mathf.Ceil(0.1f * playerUnit.spd);
+                playerUnit.currStr += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.fireLevel) * playerUnit.str);
+                playerUnit.currSpd += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.eletricLevel) * playerUnit.spd);
                 systemDialogue.text = "Player speed and strength are buffed.";
                 enemyUnit.TakeDamage(1f, playerUnit.currStr);
                 break;
             case"Fire v2":
             // Aumenta bastante o dano. Causa dano normal
-                playerUnit.currStr += (int) Mathf.Ceil(0.3f * playerUnit.str);
+                playerUnit.currStr += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.fireLevel) * playerUnit.str);
                 systemDialogue.text = "Player strength is greatly buffed!";
                 enemyUnit.TakeDamage(1f, playerUnit.currStr);
                 break;
             case"Earth v2":
             // Aumenta bastante a defesa. Causa dano baixo
-                playerUnit.currDef += (int) Mathf.Ceil(0.3f * playerUnit.def);
+                playerUnit.currDef += (int) Mathf.Ceil((0.1f * GlobalMagicSlots.earthLevel) * playerUnit.def);
                 systemDialogue.text = "Player defense is greatly buffed!";
                 enemyUnit.TakeDamage(0.2f, playerUnit.currStr);
                 break;
             case"Electric v2":
             // Aumenta bastante a velocidade. Causa dano médio
-                playerUnit.currSpd += (int) Mathf.Ceil(0.3f * playerUnit.spd);
+                playerUnit.currSpd += (int) Mathf.Ceil((0.2f * GlobalMagicSlots.eletricLevel) * playerUnit.spd);
                 systemDialogue.text = "Player speed is greatly buffed!";
                 enemyUnit.TakeDamage(0.5f, playerUnit.currStr);
                 break;
 
             case"Healing Touch":
             // Põe benção de cura por 3 turnos. Recupera HP gradualmente
-                playerUnit.healingStatus = 3;
+                playerUnit.healingStatus = 2 + GlobalMagicSlots.waterLevel;
                 systemDialogue.text = "The player is gradually healing!";
                 break;
             case"Phoenix Rise":
@@ -460,15 +511,16 @@ public class CombatManager : MonoBehaviour
                 systemDialogue.text = "The player is no longer in a bad condition!";
                 break;
             case"Charge":
-            //  Aumenta bastante o dano no próximo turno
+            //  Aumenta bastante o dano no próximo turno mas reduz bastante a defesa
                 playerUnit.chargedStatus = 2;
-                playerUnit.currStr += (int) Mathf.Ceil(2f * playerUnit.str);
+                playerUnit.currDef -= (int) Mathf.Ceil(0.8f * playerUnit.def);
+                playerUnit.currStr += (int) Mathf.Ceil((GlobalMagicSlots.eletricLevel + 1) * playerUnit.str);
                 systemDialogue.text = "The player is charging for the next turn!";
                 break;
 
             case"Poison":
             // Envenena o inimigo por 3 turnos. Recebe dano gradualmente
-                enemyUnit.poisonedStatus = 3;
+                enemyUnit.poisonedStatus = 2 + GlobalMagicSlots.waterLevel;
                 systemDialogue.text = "The enemy is poisoned!";
                 break;
             case"Hellfire":

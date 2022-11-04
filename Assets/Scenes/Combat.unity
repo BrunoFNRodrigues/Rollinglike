@@ -2069,14 +2069,8 @@ MonoBehaviour:
   - {fileID: 7744083682679012771, guid: 48e89cf66e471d249a4efb82754314e3, type: 3}
   - {fileID: 1772681182289143670, guid: 4f96e878b9e98084eb4bb2e99e1fe586, type: 3}
   randomEnemy: 0
-  ElementalSpells:
-  - Fire
-  - Water
-  - Earth
-  - Electric
-  SpecialSpells:
-  - Life
-  - Death
+  ElementalSpells: []
+  SpecialSpells: []
   systemDialogue: {fileID: 636279607}
   spellPreview: {fileID: 706253851}
   playerObject: {fileID: 8523218221108109033, guid: f62b28cc2be2ac5439ca44af01d93a61, type: 3}

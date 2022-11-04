@@ -9,15 +9,21 @@ public class MoveToRoom : MonoBehaviour
 
     public void MoveNextRoom()
     {
-        int rnd = Random.Range(2,7);
-        if(RoomNumber == rnd) 
+        int rnd = Random.Range(0,4);
+        if(rnd != 0)
         {
-            rnd++;
-        }
-        if (RoomNumber == 2)
+            rnd = Random.Range(1,7);
+            if (RoomNumber == rnd)
+            {
+                rnd++;
+            }
+
+        } else
         {
-            rnd = 0;
+            rnd = 8;
         }
+
+
         SceneManager.LoadScene(rnd);
     }
 

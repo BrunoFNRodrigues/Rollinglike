@@ -228,6 +228,18 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItem(Item item)
     {
+        for (int i = 0; i < magicSlots.Length; i++)
+        {
+            InventorySlot slot = magicSlots[i];
+            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null && itemInSlot.item == item && itemInSlot.level < 3)
+            {
+                itemInSlot.level++;
+                itemInSlot.RefreshCount();
+                return true;
+            }
+        }
+
         for (int i = 0; i < inventorySlots.Length; i++)
         {
             InventorySlot slot = inventorySlots[i];
@@ -281,6 +293,7 @@ public class InventoryManager : MonoBehaviour
 
         return false;
     }
+
 
     void SpawnNewItem(Item item, InventorySlot slot)
     {
