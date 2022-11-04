@@ -34,6 +34,11 @@ public class CombatManager : MonoBehaviour
         {"Electric+Death", "Electrocution"},
     };
 
+
+    public GameObject[] all_enemies;
+
+    public int randomEnemy;
+
     // Essas arrays deverão pegar as spells que o player estiver equipado (por enquanto estão fixas)
     public string[] ElementalSpells = new string[]{"Fire", "Water", "Earth", "Electric"};
     public string[] SpecialSpells = new string[]{"Life", "Death"};
@@ -41,7 +46,7 @@ public class CombatManager : MonoBehaviour
     public Text systemDialogue;
     public Text spellPreview;
 
-    public GameObject EnemyObject;
+    //public GameObject EnemyObject = all_enemies[randomEnemy];
     public GameObject playerObject;
 
 
@@ -64,13 +69,15 @@ public class CombatManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        randomEnemy = Random.Range(0,6);
+
         state = CombatState.START;
         StartCoroutine(SetupCombat());
     }   
 
     IEnumerator SetupCombat(){
-       GameObject enemyGO = Instantiate(EnemyObject);  
+       GameObject enemyGO = Instantiate(all_enemies[randomEnemy]);  
        enemyUnit = enemyGO.GetComponent<UnitInfo>();
 
        GameObject playerGO = Instantiate(playerObject);  

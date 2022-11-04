@@ -2061,6 +2061,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b9548c52ef00a4ab0446e8ace12b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  all_enemies:
+  - {fileID: 850430265205623082, guid: 53151dd9e30a5e848a00d18203927dc6, type: 3}
+  - {fileID: 1299352385824000007, guid: 5d88fd3b8a94ad74d874b99e3e6191db, type: 3}
+  - {fileID: 948840252799490902, guid: 8d47e6aeaf0f04b41a751acc1d4d84c3, type: 3}
+  - {fileID: 6021235524751809390, guid: 28297181f02e0764485b5efc929fd41d, type: 3}
+  - {fileID: 7744083682679012771, guid: 48e89cf66e471d249a4efb82754314e3, type: 3}
+  - {fileID: 1772681182289143670, guid: 4f96e878b9e98084eb4bb2e99e1fe586, type: 3}
+  randomEnemy: 0
   ElementalSpells:
   - Fire
   - Water
@@ -2071,7 +2079,6 @@ MonoBehaviour:
   - Death
   systemDialogue: {fileID: 636279607}
   spellPreview: {fileID: 706253851}
-  EnemyObject: {fileID: 6021235524751809390, guid: 28297181f02e0764485b5efc929fd41d, type: 3}
   playerObject: {fileID: 8523218221108109033, guid: f62b28cc2be2ac5439ca44af01d93a61, type: 3}
   CommandBtn1: {fileID: 884485350}
   CommandBtn2: {fileID: 1175217483}
