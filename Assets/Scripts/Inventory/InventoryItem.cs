@@ -15,18 +15,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     [HideInInspector] public int level = 1;
     [HideInInspector] public Transform parentAfterDrag;
 
-    void Start()
-    {
-        for (int i = 0; i <  GlobalController.globalInventorySlots.Length; i++)
-        {
-            InventorySlot slot = GlobalController.globalInventorySlots[i];
-            InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null)
-            {
-                InitialiseItem(itemInSlot.item);
-            }
-        }
-    }
 
     public void InitialiseItem(Item newItem)
     {

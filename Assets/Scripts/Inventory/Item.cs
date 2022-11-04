@@ -8,5 +8,4 @@ public class Item : ScriptableObject
     new public string name = "New Item";
     public Sprite image = null; 
     public int level = 1;
-
 }
