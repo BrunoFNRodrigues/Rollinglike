@@ -44,14 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Player
-  str: 40
-  currStr: 40
+  str: 50
+  currStr: 50
   HP: 100
   currHP: 100
-  def: 10
-  currDef: 10
-  spd: 5
-  currSpd: 5
+  def: 40
+  currDef: 40
+  spd: 50
+  currSpd: 50
   acc: 100
   currAcc: 100
   healingStatus: 0
