@@ -2071,7 +2071,7 @@ MonoBehaviour:
   - Death
   systemDialogue: {fileID: 636279607}
   spellPreview: {fileID: 706253851}
-  EnemyObject: {fileID: 1299352385824000007, guid: 5d88fd3b8a94ad74d874b99e3e6191db, type: 3}
+  EnemyObject: {fileID: 6021235524751809390, guid: 28297181f02e0764485b5efc929fd41d, type: 3}
   playerObject: {fileID: 8523218221108109033, guid: f62b28cc2be2ac5439ca44af01d93a61, type: 3}
   CommandBtn1: {fileID: 884485350}
   CommandBtn2: {fileID: 1175217483}
